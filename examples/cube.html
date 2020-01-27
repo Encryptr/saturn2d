@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Saturn2D Test</title>
+</head>
+<body>
+	<canvas id="canvas" height="500" width="800"></canvas>
+	<script type="module"> 
+		import {init, Entity, RigidBody2D} from '../src/saturn2d.js';
+
+		// Scene init
+		const canvas = document.querySelector('canvas');
+		let scene = init(canvas);
+
+		// Square body
+		let body = new RigidBody2D(1);
+		let Square = new Entity(scene, 10,10);
+		Square.rect('blue', 100, 100);
+		Square.addRigidBody(body);
+
+		// Circle 
+		let Circle = new Entity(scene, 500, 100);
+		Circle.circle(100);
+
+		let move = false;
+
+		const mainLoop = time => {
+			scene.clearRect(0,0,canvas.width,canvas.height);
+
+			document.onmousedown = function(e) {
+				move = true;
+			};
+
+			if (move) {
+				Square.forceRight(12);
+				move = false;
+			}
+
+			Square.update();
+
+			window.requestAnimationFrame(mainLoop);
+		}
+		window.requestAnimationFrame(mainLoop);
+
+
+	</script>
+</body>
+</html>
