@@ -14,6 +14,8 @@ export class Vector2 {
   set(x, y) {
     this._x = x ?? this._x;
     this._y = y ?? this._y;
+    this.onchange();
+    return this;
   }
   copy(v) {
     this._x = v._x;
@@ -56,6 +58,12 @@ export class Vector2 {
   }
   normalize() {
     return this.scale(1 / this.length);
+  }
+  zero() {
+    this._x = 0;
+    this._y = 0;
+    this.onchange();
+    return this;
   }
   *[Symbol.iterator]() {
     yield this._x;

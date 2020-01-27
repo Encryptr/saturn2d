@@ -94,11 +94,11 @@ export class Matrix3 {
    * @param {Vector2} scale
    * @param {number} rad - the rotation expressed in radians
    */
-  makeTransform(translation, scale, rad) {
+  makeTransform(translation = {}, scale = {}, rad = 0) {
     this._elements = [
-      scale._x * Math.cos(rad), scale._x * Math.sin(rad), 0,
-      scale._y * -Math.sin(rad), scale._y * Math.cos(rad), 0,
-      translation._x, translation._y, 1,
+      (scale._x ?? 1) * Math.cos(rad), (scale._x ?? 1) * Math.sin(rad), 0,
+      (scale._y ?? 1) * -Math.sin(rad), (scale._x ?? 1) * Math.cos(rad), 0,
+      (translation._x ?? 0), (translation._y ?? 0), 1,
     ];
     return this;
   }
